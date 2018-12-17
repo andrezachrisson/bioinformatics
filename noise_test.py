@@ -15,7 +15,7 @@ def uniq(column):
             count +=1
             dict[amino] = count
     try:
-        column.remove("-")
+        list(filter(lambda a: a != "-", column))
     except:
         pass
 
