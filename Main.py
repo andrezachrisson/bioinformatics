@@ -10,12 +10,7 @@ def read_file(file_name):
         MSA_list.append(tmp_list.copy())
     return MSA_list.copy()
 
-
-
-
-
-
-
+    
 def uniq(column):
     dict = {}
     count = 0
