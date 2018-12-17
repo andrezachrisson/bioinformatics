@@ -1,2 +1,2 @@
 print("Hej")
-print("Mac suger")
+print("Mac är bäst")
