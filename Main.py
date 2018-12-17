@@ -2,26 +2,14 @@ from Bio import SeqIO
 import pdb
 
 
-
+def read_file(file_name)
 MSL_list = []
-for record in SeqIO.parse("s001.align.1.msl", "fasta"):
+for record in SeqIO.parse(file_name, "fasta"):
     tmp_list = []
     for letter in record.seq:
         tmp_list.append(letter)
     MSL_list.append(tmp_list.copy())
-
-
-
-
-
-
-
-
-
-
-
-
-
+return MSL_list.copy()
 
 def uniq(column):
     dict = {}
