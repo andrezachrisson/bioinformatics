@@ -27,6 +27,7 @@ def noise_checker(column):
         return True
     else:
         return False
+
 def clean(remove_index, MSA_list):
     for index in reversed(remove_index):
         for row in MSA_list:
@@ -43,4 +44,4 @@ remove_index = check_all_columns(MSA_list)
 new_list = clean(remove_index, MSA_list)
 
 if len(new_list) == 0:
-    print('')
+    print('Removed all rows', file=stderr)
