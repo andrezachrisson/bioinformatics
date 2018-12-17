@@ -1,4 +1,5 @@
 from Bio import SeqIO
+from noise_test import *
 import pdb
 
 def read_file(file_name):
@@ -10,29 +11,36 @@ def read_file(file_name):
         MSA_list.append(tmp_list.copy())
     return MSA_list.copy()
 
-    
-def uniq(column):
-    dict = {}
-    count = 0
-    for amino in column:
-        if amino != "-" and amino not in dict:
-            count +=1
-            dict[amino] = count
-    column.remove("-")
-    if count/len(column) > 0.5:
+def check_all_columns(MSA_list):
+    remove_index = []
+    for column in range(0,len(MSA_list[0])):
+        tmp_col = []
+        for row in MSA_list:
+            tmp_col.append(row[column])
+        if not noise_checker(tmp_col):
+            remove_index.append(column)
+
+    return remove_index
+
+def noise_checker(column):
+    if indel_counter(column) and uniq(column) and amino_acid_twice(column):
         return True
     else:
         return False
+def clean(remove_index, MSA_list):
+    for index in reversed(remove_index):
+        for row in MSA_list:
+            row.pop(index)
+    return MSA_list
 
 
-def noise_checker(column):
-    value = uniq(column)
-    if value == True:
-        print("true")
-    else:
-        print("false")
 
-    return None
 
-test = ["-", "b", "c", "c"]
-noise_checker(test)
+
+
+MSA_list = read_file('s001.align.1.msl')
+remove_index = check_all_columns(MSA_list)
+new_list = clean(remove_index, MSA_list)
+
+if len(new_list) == 0:
+    print('')
