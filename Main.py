@@ -1,15 +1,24 @@
 from Bio import SeqIO
+from Bio.Seq import Seq
 from noise_test import *
 import pdb
 
 def read_file(file_name):
     MSA_list = []
-    for record in SeqIO.parse(file_name, "fasta"):
-        tmp_list = []
-        for letter in record.seq:
-            tmp_list.append(letter)
-        MSA_list.append(tmp_list.copy())
-    return MSA_list.copy()
+    reduced_file='reduced_file'
+    with open(file_name) as reference, open(reduced_file,'w') as reduced:
+        records = SeqIO.parse(file_name, 'fasta')
+        for record in records:
+            tmp_list = []
+            for letter in record.seq:
+                tmp_list.append(letter)
+            MSA_list.append(tmp_list.copy())
+        remove_index = check_all_columns(MSA_list)
+        new_list = clean(remove_index, MSA_list)
+        records = SeqIO.parse(file_name, 'fasta')
+        for idx, record in enumerate(records):
+            record.seq = Seq("".join(new_list[idx]))
+            SeqIO.write(record, reduced, 'fasta')
 
 def check_all_columns(MSA_list):
     remove_index = []
@@ -39,9 +48,4 @@ def clean(remove_index, MSA_list):
 
 
 
-MSA_list = read_file('s001.align.1.msl')
-remove_index = check_all_columns(MSA_list)
-new_list = clean(remove_index, MSA_list)
-
-if len(new_list) == 0:
-    print('Removed all rows', file=stderr)
+read_file('s001.align.1.msl')
