@@ -8,6 +8,9 @@ import pdb
 from dendropy.calculate import treecompare
 import dendropy
 from dendropy import Tree
+import tempfile
+from subprocess import Popen, PIPE
+import os
 
 
 def main():
@@ -25,6 +28,13 @@ def main():
     tree1.encode_bipartitions()
     tree2.encode_bipartitions()
     print(treecompare.symmetric_difference(tree1, tree2))
+
+    dirpath = os.path.dirname(os.path.realpath(__file__))
+    print(dirpath)
+    #with tempfile.NamedTemporaryFile(dir = dirpath) as tempdir:
+
+
+
 
 
 
