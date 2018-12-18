@@ -1,6 +1,9 @@
 """ Own functions """
 from noise_test import noise_checker
 
+""" Modules """
+from Bio import SeqIO
+from Bio.Seq import Seq
 
 def read_file(file_name):
     MSA_list = []

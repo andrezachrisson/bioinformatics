@@ -31,7 +31,7 @@ def main():
 
     dirpath = os.path.dirname(os.path.realpath(__file__))
     print(dirpath)
-    #with tempfile.NamedTemporaryFile(dir = dirpath) as tempdir:
+    with tempfile.NamedTemporaryFile(dir = dirpath) as tempdir:
 
 
 
