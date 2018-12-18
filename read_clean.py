@@ -5,11 +5,12 @@ from noise_test import noise_checker
 from Bio import SeqIO
 from Bio.Seq import Seq
 import os
-from shutil import copyfile
+import pdb
+
 
 def read_file(file_name, tempdir):
     MSA_list = []
-    reduced_file= tempdir+'/reduced_file'
+    reduced_file= 'reduced_file' # LÄGG I TEMP FIL
 
     with open(file_name,'r') as reference, open(reduced_file,'w') as reduced:
         records = SeqIO.parse(file_name, 'fasta')
@@ -18,12 +19,16 @@ def read_file(file_name, tempdir):
             for letter in record.seq:
                 tmp_list.append(letter)
             MSA_list.append(tmp_list.copy())
+        print(file_name)
         remove_index = check_all_columns(MSA_list)
         new_list = clean(remove_index, MSA_list)
+        if len(MSA_list)== 0:
+            return False
         records = SeqIO.parse(file_name, 'fasta')
         for idx, record in enumerate(records):
             record.seq = Seq("".join(new_list[idx]))
             SeqIO.write(record, reduced, 'fasta')
+    return True
     #copyfile(file_name,tempdir+'/'+file_name)
 
 def check_all_columns(MSA_list):
