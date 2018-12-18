@@ -48,10 +48,15 @@ def clean(remove_index, MSA_list):
 
 def main():
     read_file('s001.align.1.msl')
-
-    t1 = Tree.get(file=open('normal_tree','r'), 
+    tref = Tree.get(file=open('ref.tree','r'),
             schema='newick',
             tree_offset=0)
+    t1 = Tree.get(file=open('normal_tree','r'),
+            schema='newick',
+            tree_offset=0)
+    tref.encode_bipartitions()
+    t1.encode_bipartitions()
+    print(treecompare.false_positives_and_negatives(tref, t1))
 
 
 
