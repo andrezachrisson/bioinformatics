@@ -2,6 +2,8 @@ from Bio import SeqIO
 from Bio.Seq import Seq
 from noise_test import *
 import pdb
+from dendropy.calculate import treecompare
+from dendropy import Tree
 
 def read_file(file_name):
     MSA_list = []
@@ -44,8 +46,15 @@ def clean(remove_index, MSA_list):
     return MSA_list
 
 
+def main():
+    read_file('s001.align.1.msl')
+
+    t1 = Tree.get(file=open('normal_tree','r'), 
+            schema='newick',
+            tree_offset=0)
 
 
 
 
-read_file('s001.align.1.msl')
+if __name__ == '__main__':
+    main()
