@@ -1,3 +1,9 @@
+def noise_checker(column):
+    if indel_counter(column) and uniq(column) and amino_acid_twice(column):
+        return True
+    else:
+        return False
+
 def indel_counter(column):
     indels = column.count('-')
     column_length = len(column)
