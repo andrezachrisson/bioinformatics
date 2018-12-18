@@ -3,6 +3,7 @@ from Bio.Seq import Seq
 from noise_test import *
 import pdb
 from dendropy.calculate import treecompare
+import dendropy
 from dendropy import Tree
 
 def read_file(file_name):
@@ -48,16 +49,19 @@ def clean(remove_index, MSA_list):
 
 def main():
     read_file('s001.align.1.msl')
-    tref = Tree.get(file=open('ref.tree','r'),
-            schema='newick',
-            tree_offset=0)
-    t1 = Tree.get(file=open('normal_tree','r'),
-            schema='newick',
-            tree_offset=0)
-    tref.encode_bipartitions()
-    t1.encode_bipartitions()
-    print(treecompare.false_positives_and_negatives(tref, t1))
 
+    tns = dendropy.TaxonNamespace()
+    tree1 = Tree.get_from_path(
+            "ref.tree",
+            "newick",
+            taxon_namespace=tns)
+    tree2 = Tree.get_from_path(
+            "reduced_tree",
+            "newick",
+            taxon_namespace=tns)
+    tree1.encode_bipartitions()
+    tree2.encode_bipartitions()
+    print(treecompare.symmetric_difference(tree1, tree2))
 
 
 
