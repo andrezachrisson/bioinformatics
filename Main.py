@@ -30,10 +30,15 @@ def main():
     print(treecompare.symmetric_difference(tree1, tree2))
 
     dirpath = os.path.dirname(os.path.realpath(__file__))
-    print(dirpath)
-    with tempfile.NamedTemporaryFile(dir = dirpath) as tempdir:
 
-
+    with tempfile.TemporaryDirectory(dir = dirpath) as tempdir:
+        # fastprot fastafile
+            print(tempdir)
+            os.chdir(tempdir)
+            with open('red_fast', 'w') as file:
+                process = Popen(['fastprot','reduced_file'], stdin=PIPE, stdout=PIPE, stderr=PIPE, encoding = 'utf8')
+                file.write(process.stdout.read())
+            pdb.set_trace()
 
 
 
