@@ -13,40 +13,34 @@ from subprocess import Popen, PIPE
 import os
 import re
 
-def fastPhylo():
-    dirpath = os.path.dirname(os.path.realpath(__file__))
-    with tempfile.TemporaryDirectory(dir = dirpath) as tempdir:
-
+def fastPhylo(tempdir):
+        os.chdir(tempdir)
         """ Reduced noise tree"""
         with open('red_fast', 'w') as file:
-            process = Popen(['fastprot','reduced_file'], stdin=PIPE, stdout=PIPE, stderr=PIPE, encoding = 'utf8')
+            process = Popen(['fastprot','reduced_file'], stdin=PIPE, stdout=PIPE, stderr=PIPE, encoding = 'utf8', cwd = tempdir)
             file.write(process.stdout.read())
-            os.rename("red_fast", tempdir + "/"+ "red_fast")
         #pdb.set_trace()
 
         with open('red_tree', 'w') as file:
             process = Popen(['fnj','red_fast', '-O', 'newick'], stdin=PIPE, stdout=PIPE, stderr=PIPE, encoding = 'utf8', cwd = tempdir)
             file.write(process.stdout.read())
-            os.rename("red_tree", tempdir + "/"+ "red_tree")
         #pdb.set_trace()
-
         """ Normal tree"""
         with open('normal_fast', 'w') as file:
-            process = Popen(['fastprot','s001.align.1.msl'], stdin=PIPE, stdout=PIPE, stderr=PIPE, encoding = 'utf8')
+            process = Popen(['fastprot','s001.align.1.msl'], stdin=PIPE, stdout=PIPE, stderr=PIPE, encoding = 'utf8', cwd = tempdir)
             file.write(process.stdout.read())
-            os.rename("normal_fast", tempdir + "/"+ "normal_fast")
         #pdb.set_trace()
 
         with open('normal_tree', 'w') as file:
             process = Popen(['fnj','normal_fast', '-O', 'newick'], stdin=PIPE, stdout=PIPE, stderr=PIPE, encoding = 'utf8', cwd = tempdir)
             file.write(process.stdout.read())
-            os.rename("normal_tree", tempdir + "/"+ "normal_tree")
         #pdb.set_trace()
 
         tree_compare (tempdir)
 
 def tree_compare(tempdir):
         tns = dendropy.TaxonNamespace()
+        os.chdir('/home/andre/Documents/Bioinformatics/bioinformatics')
         tree1 = Tree.get_from_path(
                 "ref.tree",
                 "newick",
@@ -65,9 +59,19 @@ def tree_compare(tempdir):
         print(treecompare.symmetric_difference(tree1, tree3))
 
 def main():
-    read_file("s001.align.1.msl")
-    fastPhylo()
+    dirpath = os.path.dirname(os.path.realpath(__file__))
+    with tempfile.TemporaryDirectory(dir = dirpath) as tempdir:
+        directory = dirpath + '/TEST_DATA/asymmetric_2.0'
+        for filename in os.listdir(directory):
 
+            if filename[0] != '.':
+                print(filename)
+                """if re.search('tree', filename):
+                    copyfile(filename,tempdir+'/ref.tree')
+                else:
+                    copyfile(filename,tempdir+'/'filename)
+                    read_file(filename, tempdir)
+                    fastPhylo(tempdir)"""
 
 
 
