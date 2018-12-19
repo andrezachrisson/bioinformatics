@@ -1,4 +1,4 @@
-a,s,y,m,m,e,t,r,i,c,_,0,.,5,.,t,r,e,e
+asymmetric_0.5.tree,asymmetric_0.5.tree_reduced
 6,4
 14,16
 6,10
@@ -299,7 +299,7 @@ a,s,y,m,m,e,t,r,i,c,_,0,.,5,.,t,r,e,e
 12,14
 6,6
 8,8
-s,y,m,m,e,t,r,i,c,_,1,.,0,.,t,r,e,e
+symmetric_1.0.tree,symmetric_1.0.tree_reduced
 4,4
 6,6
 6,6
@@ -600,7 +600,7 @@ s,y,m,m,e,t,r,i,c,_,1,.,0,.,t,r,e,e
 2,2
 8,6
 2,4
-a,s,y,m,m,e,t,r,i,c,_,2,.,0,.,t,r,e,e
+asymmetric_2.0.tree,asymmetric_2.0.tree_reduced
 14,10
 14,14
 14,10
@@ -901,7 +901,7 @@ a,s,y,m,m,e,t,r,i,c,_,2,.,0,.,t,r,e,e
 12,14
 10,8
 18,14
-s,y,m,m,e,t,r,i,c,_,0,.,5,.,t,r,e,e
+symmetric_0.5.tree,symmetric_0.5.tree_reduced
 6,4
 10,8
 2,2
@@ -1202,7 +1202,7 @@ s,y,m,m,e,t,r,i,c,_,0,.,5,.,t,r,e,e
 8,8
 4,4
 4,4
-a,s,y,m,m,e,t,r,i,c,_,1,.,0,.,t,r,e,e
+asymmetric_1.0.tree,asymmetric_1.0.tree_reduced
 10,10
 8,10
 10,8
@@ -1503,7 +1503,7 @@ a,s,y,m,m,e,t,r,i,c,_,1,.,0,.,t,r,e,e
 8,10
 12,12
 12,8
-s,y,m,m,e,t,r,i,c,_,2,.,0,.,t,r,e,e
+symmetric_2.0.tree,symmetric_2.0.tree_reduced
 6,4
 8,6
 6,6

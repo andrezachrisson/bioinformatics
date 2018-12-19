@@ -2,7 +2,7 @@ import csv
 import matplotlib.pyplot as plt
 import re
 
-with open('test.csv', 'r') as data:
+with open('results.csv', 'r') as data:
         reader = csv.reader(data)
         all_data = list(reader)
 
@@ -42,11 +42,18 @@ with open('test.csv', 'r') as data:
         print('Min (Normal), Min (reduced)')
         print(min_data)
 
+        sym = [];
+        asym = [];
+        for idx, data in enumerate(diff_data):
+            if re.search(r'asym', order[idx]):
+                print(data)
+                asym += data
+            else:
+                sym += data
+
         hist1 = plt.figure()
-        asym = diff_data[0]+diff_data[1]+diff_data[2]
         plt.hist(asym ,histtype = 'bar')
         hist2 = plt.figure()
-        sym = diff_data[3]+diff_data[4] +diff_data[5]
         plt.hist(sym,histtype = 'bar')
         hist1.savefig('asymmetric_comparison',bbox_inches='tight')
         hist2.savefig('symmetric_comparison',bbox_inches='tight')
