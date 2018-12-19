@@ -75,7 +75,6 @@ def main():
                             print(filename)
                             copyfile(filename,tempdir+'/ref.tree')
                             statistics =[(filename,filename+'_reduced')]
-
                             break
 
 

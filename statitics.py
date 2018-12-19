@@ -46,14 +46,23 @@ with open('results.csv', 'r') as data:
         asym = [];
         for idx, data in enumerate(diff_data):
             if re.search(r'asym', order[idx]):
-                print(data)
+                #print(data)
                 asym += data
             else:
                 sym += data
 
         hist1 = plt.figure()
         plt.hist(asym ,histtype = 'bar')
+        plt.xlabel("Difference")
+        plt.ylabel("Occurance")
+        plt.title("Asymmetric - Difference between distance to reference tree for normal and reduced")
+        plt.grid()
         hist2 = plt.figure()
+
         plt.hist(sym,histtype = 'bar')
+        plt.xlabel("Difference")
+        plt.ylabel("Occurance")
+        plt.title("Symmetric - Difference between distance to reference tree for normal and reduced")
+        plt.grid()
         hist1.savefig('asymmetric_comparison',bbox_inches='tight')
         hist2.savefig('symmetric_comparison',bbox_inches='tight')
