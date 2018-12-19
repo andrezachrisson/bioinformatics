@@ -10,7 +10,7 @@ import pdb
 
 def read_file(file_name, tempdir):
     MSA_list = []
-    reduced_file= 'reduced_file' # LÄGG I TEMP FIL
+    reduced_file= tempdir+'/reduced_file'
 
     with open(file_name,'r') as reference, open(reduced_file,'w') as reduced:
         records = SeqIO.parse(file_name, 'fasta')
@@ -19,7 +19,6 @@ def read_file(file_name, tempdir):
             for letter in record.seq:
                 tmp_list.append(letter)
             MSA_list.append(tmp_list.copy())
-        print(file_name)
         remove_index = check_all_columns(MSA_list)
         new_list = clean(remove_index, MSA_list)
         if len(MSA_list)== 0:
@@ -29,7 +28,6 @@ def read_file(file_name, tempdir):
             record.seq = Seq("".join(new_list[idx]))
             SeqIO.write(record, reduced, 'fasta')
     return True
-    #copyfile(file_name,tempdir+'/'+file_name)
 
 def check_all_columns(MSA_list):
     remove_index = []
