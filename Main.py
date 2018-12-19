@@ -74,7 +74,7 @@ def main():
                         if re.search(r'tree', filename):
                             print(filename)
                             copyfile(filename,tempdir+'/ref.tree')
-                            statistics =[(filename)]
+                            statistics =[(filename, )]
                             break
 
 
