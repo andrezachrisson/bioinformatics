@@ -72,7 +72,6 @@ def main():
                     #print(filename[0])
                     if filename[0] != '.':
                         if re.search(r'tree', filename):
-                            print(filename)
                             copyfile(filename,tempdir+'/ref.tree')
                             statistics =[(filename,filename+'_reduced')]
                             break
@@ -81,9 +80,7 @@ def main():
             for filename in os.listdir(data):
                 if os.path.isfile(filename):
                     if filename[0] != '.' and not re.search(r'tree', filename):
-
                             if read_file(filename, tempdir):
-
                                 statistics.append(fastPhylo(filename, tempdir))
                             else:
                                 pass
